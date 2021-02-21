@@ -2,7 +2,9 @@ import React from 'react';
 import firebase from '../firebase'
 import 'firebase/firestore';
 import 'firebase/auth';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import '../stylesheets/App.css'
+import NavigationBar from '../components/NavigationBar'
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
@@ -16,8 +18,8 @@ class ChatRoom extends React.Component {
             formValue: ''
         }
         this.dummy = React.createRef();
-        // this.messagesRef = firestore.collection('messages');
-        // this.query = this.messagesRef.orderBy('createdAt').limit(25);
+        this.messagesRef = firestore.collection('messages');
+        this.query = this.messagesRef.orderBy('createdAt').limit(25);
         this.sendMessage = this.sendMessage.bind(this)
         this.update = this.update.bind(this)
     }
@@ -57,14 +59,19 @@ class ChatRoom extends React.Component {
     render() {
         return (
             <>
-                <div>
-                    {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
-                    <div ref={this.dummy}> </div>
+                <div id="ourbody">
+                    <div id="nav-bar"><NavigationBar></NavigationBar></div>
+                    <div id="love">
+                        {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
+                        <div ref={this.dummy}> </div>
+                    </div>
+                    <div id="grr">
+                        <form id="ourform" onSubmit={this.sendMessage}>
+                        <input id="ourinput" value={this.state.formValue} placeholder="Message..." onChange={(e)=>this.setState({formValue: e.target.value})}/> 
+                        <button id="ourbutton" type="submit" disabled={!this.state.formValue}> Submit Button </button>
+                        </form>
+                    </div>
                 </div>
-                <form onSubmit={this.sendMessage}>
-                <input value={this.state.formValue} onChange={(e)=>this.setState({formValue: e.target.value})}/> 
-                <button type="submit" disabled={!this.state.formValue}> Submit Button </button>
-                </form>
             </>
         )
     }
