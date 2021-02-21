@@ -62,19 +62,21 @@ class PrivateChatRoom extends React.Component {
                 <div class="ourbody">
                     <div class="nav-bar"><NavigationBar></NavigationBar></div>
                     <div class="sidebar">
-                        <a>
-                            {/* Populate with liked list */}
-                        </a>
+                        <h1>Contacts</h1>
+                        <p>Hi</p>
+                        <p>Hi</p>
                     </div>
-                    <div class="love">
-                        {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
-                        <div ref={this.dummy}> </div>
-                    </div>
-                    <div class="grr">
-                        <form class="ourform" onSubmit={this.sendMessage}>
-                        <input class="ourinput" value={this.state.formValue} placeholder="Message..." onChange={(e)=>this.setState({formValue: e.target.value})}/> 
-                        <button class="ourbutton" type="submit" disabled={!this.state.formValue}> Submit Button </button>
-                        </form>
+                    <div id="proom">
+                        <div class="love">
+                            {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
+                            <div ref={this.dummy}> </div>
+                        </div>
+                        <div class="grr">
+                            <form class="ourform" onSubmit={this.sendMessage}>
+                            <input class="ourinput" id="pinput" value={this.state.formValue} placeholder="Message..." onChange={(e)=>this.setState({formValue: e.target.value})}/> 
+                            <button class="ourbutton" id="pbutton" type="submit" disabled={!this.state.formValue}> Submit Button </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </>
