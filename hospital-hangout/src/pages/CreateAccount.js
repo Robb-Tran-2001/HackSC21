@@ -1,7 +1,6 @@
 import React from 'react'; 
 import '../stylesheets/CreateAccount.css'; 
 import { Link } from 'react-router-dom'; 
-import addNotification from 'react-push-notification';
 import firebase from '../firebase'
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -26,13 +25,13 @@ class CreateAccount extends React.Component {
 		event.preventDefault(); 
 		//if reconfirm password != password, then show warning modal 
 		if(this.state.password !== this.state.reconfirmPassword) {
-			addNotification({
-				title: 'Wrong Credentials',
-				subtitle: 'Password and repeated password are not the same',
-				message: 'Try again with a different password',
-				theme: 'darkblue',
-				native: true // when using native, your OS will handle theming.
-			});
+			// addNotification({
+			// 	title: 'Wrong Credentials',
+			// 	subtitle: 'Password and repeated password are not the same',
+			// 	message: 'Try again with a different password',
+			// 	theme: 'darkblue',
+			// 	native: true // when using native, your OS will handle theming.
+			// });
 		}
 		else {
 			//make axios post call with new data 

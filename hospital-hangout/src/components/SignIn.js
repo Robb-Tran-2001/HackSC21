@@ -30,7 +30,7 @@ const SignIn = withRouter(({history}) => (
             history.push('/find-profile'); 
         }); 
     }} class="google-sign-in">
-        Sign In with Google
+        Continue with Google
     </button>
 )); 
 
