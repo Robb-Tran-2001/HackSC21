@@ -40,7 +40,7 @@ class FindProfile extends React.Component {
 		e.preventDefault();
 		if(this.state.count < this.state.profiles.length) {
 			firestore.collection('users').doc(auth.currentUser.uid)
-				.update({"liked": this.state.profiles[this.state.count].uid});
+				.update({liked: firebase.firestore.FieldValue.arrayUnion(this.state.profiles[this.state.count].uid) } );
 			console.log("FIRST PERSON ", this.state.profiles[this.state.count])
 			this.setState(prevState => ({count: prevState.count + 1}))
 			console.log("Checkpoint 2");
@@ -64,10 +64,10 @@ class FindProfile extends React.Component {
 					<TinderCard user={this.state.count < this.state.profiles.length ? this.state.profiles[this.state.count] : filler}/> 
 				</div>
 				<div style={{display: 'flex', justifyContent: 'center'}}>
-					<button class="dislike-button" name="dislike" onClick={this.handleOnClickLike}>
+					<button class="dislike-button" name="dislike" onClick={this.handleOnClickDislike}>
 						<img src={process.env.PUBLIC_URL + '/tinder-dislike.jpg'} style={{width: '50px'}}/> 
 					</button>
-					<button class="like-button" name="like" onClick={this.handleOnClickDislike}>
+					<button class="like-button" name="like" onClick={this.handleOnClickLike}>
 						<img src={process.env.PUBLIC_URL + '/tinder-like.jpg'} style={{width: '50px'}}/> 
 					</button>
 				</div>
