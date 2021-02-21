@@ -13,7 +13,8 @@ class FindProfile extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			profiles: []
+			profiles: [], 
+			count: 0
 		}
 		this.handleOnClick = this.handleOnClick.bind(this);
 	}
@@ -22,7 +23,6 @@ class FindProfile extends React.Component {
 		document.body.style.backgroundImage = "url('/find-profile-background.jpg')";
 		firestore.collection('users').where("uid", "!=", auth.currentUser.uid).get()
 			.then((users) => {
-				console.log("USERS ", users);
 				let u = [];
 				users.forEach(user => {
 					u.push(user.data());
@@ -36,10 +36,11 @@ class FindProfile extends React.Component {
 		e.preventDefault();
 		const name = e.target.name;
 		if(name === 'like') {
-			console.log(this.state.profiles[0])
+			console.log(this.state.profiles[this.state.count]); 
 			firestore.collection('users').where("uid", "===", auth.currentUser.uid)
-				.update({"liked": this.state.profiles[0].uid});
+				.update({"liked": this.state.profiles[this.state.count].uid});
 		} 
+		this.setState({count: this.state.count + 1}); 
 		this.state.profiles.shift();
 	}
 
