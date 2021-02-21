@@ -19,7 +19,7 @@ class ChatRoom extends React.Component {
         }
         this.dummy = React.createRef();
         this.messagesRef = firestore.collection('messages');
-        this.query = this.messagesRef.orderBy('createdAt').limit(25);
+        this.query = this.messagesRef.orderBy('createdAt');
         this.sendMessage = this.sendMessage.bind(this)
         this.update = this.update.bind(this)
     }
@@ -27,7 +27,7 @@ class ChatRoom extends React.Component {
         this.update();
     }
     update() {
-        firestore.collection('messages').orderBy('createdAt', 'desc').limit(25)
+        firestore.collection('messages').orderBy('createdAt', 'desc')
             .onSnapshot( (snapshot) => {
                 let m = []
                 snapshot.forEach(doc => {
@@ -80,9 +80,10 @@ class ChatRoom extends React.Component {
 function ChatMessage(props) {
     const {text, uid, photoURL} = props.message;
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+    const imageExists = ((photoURL !== undefined) && (photoURL.length > 0)); 
     return (
         <div className={`message ${messageClass}`}>
-            <img src={photoURL} />
+            {imageExists ? <img src={photoURL} /> : <img src="/generic-avatar.png"/>}
             <p> {text} </p>
         </div>
     )
