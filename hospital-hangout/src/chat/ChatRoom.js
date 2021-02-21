@@ -27,22 +27,20 @@ class ChatRoom extends React.Component {
         this.update();
     }
     update() {
-        firestore.collection('messages').orderBy('createdAt').limit(25).get()
-            .then( (snapshot) => {
+        firestore.collection('messages').orderBy('createdAt', 'desc').limit(25)
+            .onSnapshot( (snapshot) => {
+                let m = []
                 snapshot.forEach(doc => {
                     if (doc.exists) {
-
-                        this.setState(prevState => ({
-                            messages: [...prevState.messages, doc.data()]
-                        }));
+                        m.push(doc.data())
                         console.log(this.state.messages)
                     }
                     else {
                         console.log("nothing for you man")
                     }
                 })
+                 this.setState({messages: m.reverse()});
             })
-            .catch(err => console.log('Error ', err));
     }
 
     sendMessage = async(e) => {
