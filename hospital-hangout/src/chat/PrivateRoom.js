@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import firebase from '../firebase'
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -19,7 +19,7 @@ class ChatRoom extends React.Component {
         }
         this.dummy = React.createRef();
         this.messagesRef = firestore.collection('messages');
-        this.query = this.messagesRef.orderBy('createdAt');
+        this.query = this.messagesRef.orderBy('createdAt').limit(25);
         this.sendMessage = this.sendMessage.bind(this)
         this.update = this.update.bind(this)
     }
@@ -27,7 +27,7 @@ class ChatRoom extends React.Component {
         this.update();
     }
     update() {
-        firestore.collection('messages').orderBy('createdAt', 'desc')
+        firestore.collection('messages').orderBy('createdAt', 'desc').limit(25)
             .onSnapshot( (snapshot) => {
                 let m = []
                 snapshot.forEach(doc => {
@@ -59,8 +59,13 @@ class ChatRoom extends React.Component {
     render() {
         return (
             <>
-                 <div class="ourbody">
+                <div class="ourbody">
                     <div class="nav-bar"><NavigationBar></NavigationBar></div>
+                    <div class="sidebar">
+                        <a>
+                            {/* Populate with liked list */}
+                        </a>
+                    </div>
                     <div class="love">
                         {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
                         <div ref={this.dummy}> </div>
@@ -80,10 +85,9 @@ class ChatRoom extends React.Component {
 function ChatMessage(props) {
     const {text, uid, photoURL} = props.message;
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-    const imageExists = ((photoURL !== undefined) && (photoURL.length > 0)); 
     return (
         <div className={`message ${messageClass}`}>
-            {imageExists ? <img src={photoURL} /> : <img src="/generic-avatar.png"/>}
+            <img src={photoURL} />
             <p> {text} </p>
         </div>
     )
