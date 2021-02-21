@@ -19,7 +19,7 @@ class FindProfile extends React.Component {
 		this.handleOnClick = this.handleOnClick.bind(this);
 	}
 	
-	componentDidMount() {
+	componentDidMount() { 
 		document.body.style.backgroundImage = "url('/find-profile-background.jpg')";
 		firestore.collection('users').where("uid", "!=", auth.currentUser.uid).get()
 			.then((users) => {
@@ -34,13 +34,11 @@ class FindProfile extends React.Component {
 
 	handleOnClick(e) {
 		e.preventDefault();
-		const name = e.target.name;
-		if(name === 'like') {
-			console.log(this.state.profiles[this.state.count]); 
+		const name = e.target.name; 
+		if(name === 'like' ) {
 			firestore.collection('users').where("uid", "===", auth.currentUser.uid)
-				.update({"liked": this.state.profiles[this.state.count].uid});
+				.update({"liked": this.state.profiles[0].uid});
 		} 
-		this.setState({count: this.state.count + 1}); 
 		this.state.profiles.shift();
 	}
 

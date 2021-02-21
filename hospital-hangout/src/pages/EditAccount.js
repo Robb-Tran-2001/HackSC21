@@ -1,23 +1,39 @@
 import React from 'react'; 
 import NavigationBar from '../components/NavigationBar'; 
 import '../stylesheets/EditAccount.css'; 
+import firebase from '../firebase'
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 class EditAccount extends React.Component {
 	constructor(props) {
-		super(props); 
+		super(props);  
 		this.state = {
-			userDetails: {
-
-			}, 
-			editedUser: {
-				username: '', 
-				password: '', 
-				description: ''
-			}
-		}; 
+			username: '', 
+			password: '', 
+			description: ''
+		}
 	}
 	componentDidMount() {
 		document.body.style.backgroundImage = "url('/find-profile-background.jpg')";
+	}
+
+	handleUsername = (e) => {
+		
+	}
+
+	handleDescription = (e) => {
+		
+	}
+
+	handleSubmit = () => {
+		console.log("username: " + this.state.username); 
+		console.log("password: " + this.state.password); 
+		// firestore.collection('users').where("uid", "===", auth.currentUser.uid).update({"username": this.state.username});
+		// firestore.collection('users').where("uid", "===", auth.currentUser.uid).update({"info": this.state.description});
 	}
 
 	render() {
@@ -27,9 +43,8 @@ class EditAccount extends React.Component {
 				<div class="edit-input-form">
 					<h1 style={{display: 'flex', justifyContent: 'center', paddingTop: '30px', color: '#5E60CE'}}>Edit Account</h1>
 					<form onSubmit={this.handleSubmit} style={{marginBottom: '30px'}}>
-						<input type="text" value={this.state.editedUser.username} placeholder="Username" class="input-field" onChange={this.handleUsernameChange}/>
-						<input type="password" value={this.state.editedUser.password} placeholder="Password" class="input-field" style={{marginTop: '20px'}} onChange={this.handlePasswordChange}/>
-						<input type="text" value={this.state.editedUser.description} placeholder="About Me" class="description-field" style={{marginTop: '20px'}}/> 
+						<input type="text" value={this.state.username} placeholder="Username" class="input-field"/>
+						<input type="text" value={this.state.description} placeholder="About Me" class="description-field" style={{marginTop: '20px'}}/> 
 						<input type="submit" value="Submit" class="submit-edit"/> 
 					</form>
 				</div>
