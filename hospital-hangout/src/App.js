@@ -3,6 +3,7 @@ import CreateAccount from './pages/CreateAccount';
 import FindProfile from './pages/FindProfile'
 import EditAccount from './pages/EditAccount'; 
 import ChatRoom from './chat/ChatRoom'; 
+import PrivateChatRoom from './chat/PrivateRoom'; 
 
 import {
   BrowserRouter as Router,
@@ -37,6 +38,7 @@ const App = () => {
       <Route exact path="/find-profile" component={FindProfile}/> 
       <Route exact path="/edit-account" component={EditAccount}/> 
       <Route exact path="/general-chat" component={ChatRoom}/> 
+      <Route exact path="/private-chat" component={PrivateChatRoom}/> 
     </Router>
   ); 
 }; 

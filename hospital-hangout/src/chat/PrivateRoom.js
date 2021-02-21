@@ -9,7 +9,7 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 //general chat
-class ChatRoom extends React.Component {
+class PrivateChatRoom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,4 +93,4 @@ function ChatMessage(props) {
     )
 }
 
-export default ChatRoom;
+export default PrivateChatRoom;

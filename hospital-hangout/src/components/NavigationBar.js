@@ -25,6 +25,11 @@ const NavigationBar = () => {
 						General Chat
 					</Link>
 				</div>
+				<div style={{marginLeft: '50px'}}>
+					<Link to="/private-chat" style={{color: 'white', textDecoration: 'none', fontSize: '20px', lineHeight: '50px'}}> 
+						Private Chat
+					</Link>
+				</div>
 				
 			</div>
 		</div>
