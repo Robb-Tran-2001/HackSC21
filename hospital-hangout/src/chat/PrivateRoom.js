@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import firebase from '../firebase'
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -59,8 +59,13 @@ class ChatRoom extends React.Component {
     render() {
         return (
             <>
-                 <div class="ourbody">
+                <div class="ourbody">
                     <div class="nav-bar"><NavigationBar></NavigationBar></div>
+                    <div class="sidebar">
+                        <a>
+                            {/* Populate with liked list */}
+                        </a>
+                    </div>
                     <div class="love">
                         {this.state.messages && this.state.messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
                         <div ref={this.dummy}> </div>

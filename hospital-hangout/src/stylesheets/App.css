@@ -1,8 +1,8 @@
-#ourbody {
+.ourbody {
   background-color: #282c34;
 }
 
-#ourform {
+.ourform {
   height: 72px;
   position: fixed;
   bottom: 0;
@@ -12,12 +12,12 @@
   font-size: 1.5rem;
 }
 
-#ourform button {
+.ourform button {
   width: 20%;
   background-color: rgb(56, 56, 143);
 }
 
-#ourinput {
+.ourinput {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -28,7 +28,7 @@
   padding: 0 10px;
 }
 
-#ourbutton {
+.ourbutton {
   background-color: #282c34; /* Green */
   border: none;
   color: white;
@@ -40,21 +40,10 @@
   font-size: 1.25rem;
 }
 
-#ourbutton:disabled {
+.ourbutton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-
-.sign-in {
-  color: #282c34;
-  background: white;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-
-
 
 .message ul, li {
   text-align: left;
@@ -76,7 +65,7 @@
   display: flex;
   align-items: center;
 }
-#ourform {
+.ourform {
     height: 72px;
     position: fixed;
     bottom: 0;
@@ -85,18 +74,18 @@
     display: flex;
     font-size: 1.5rem;
   }
-#nav-bar {
+.nav-bar {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1;
 }
 
-#grr{
+.grr{
     display: flex;
 }
 
-#love{
+.love{
     margin-bottom: 80px;
 }
 .sent {
