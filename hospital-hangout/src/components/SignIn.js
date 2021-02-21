@@ -13,12 +13,13 @@ const SignIn = withRouter(({history}) => (
             console.log("RESULT " ,result);
             console.log("UID ", result.user.uid);
             console.log("NAME ", result.user.displayName); 
-            let newPerson = true;
             firestore.collection('users').get()
                 .then((users) => { 
+                    let newPerson = true;
                     users.forEach(user => {
-                        if(user.uid === result.user.uid) newPerson = false
+                        if(user.data().uid === result.user.uid) newPerson = false
                     })
+                    console.log("NEW?", newPerson);
                     if(newPerson) {
                         firestore.collection('users').add({
                             info: '',
