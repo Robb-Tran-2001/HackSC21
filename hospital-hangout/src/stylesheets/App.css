@@ -17,6 +17,11 @@
   background-color: rgb(56, 56, 143);
 }
 
+#pbutton {
+  width: 15%;
+  padding-left: 10px;
+}
+
 .ourinput {
   line-height: 1.5;
   width: 100%;
@@ -26,6 +31,10 @@
   outline: none;
   border: none;
   padding: 0 10px;
+}
+
+#pinput {
+  width: 70%;
 }
 
 .ourbutton {
@@ -74,13 +83,42 @@
     display: flex;
     font-size: 1.5rem;
   }
+
 .nav-bar {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 30;
+}
+#proom {
+  right: 0;
+  position: absolute;
+  width: 85%;
+  background-color: #282c34;
+}
+.sidebar {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 15%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  /* padding-top: 20px; */
+  margin-top: 50px;
+  text-align: center;
 }
 
+.sidebar p {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+.sidebar h1 {
+  color: white;
+  text-decoration: underline;
+}
 .grr{
     display: flex;
 }
