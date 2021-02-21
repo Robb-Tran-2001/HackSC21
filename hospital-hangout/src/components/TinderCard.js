@@ -2,6 +2,10 @@ import React from 'react';
 import '../stylesheets/TinderCard.css'; 
 
 class TinderCard extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	
 	render() {
 		return (
 			<div className="TinderCard">

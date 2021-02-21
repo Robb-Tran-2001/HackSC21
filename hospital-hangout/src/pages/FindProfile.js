@@ -8,7 +8,10 @@ import 'firebase/auth';
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-
+const filler = {
+	username: 'The Bit Fiddler',
+	info: 'If you see me here, then you have gone thru all in the database. Come back next time!'
+}
 class FindProfile extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +19,8 @@ class FindProfile extends React.Component {
 			profiles: [], 
 			count: 0
 		}
-		this.handleOnClick = this.handleOnClick.bind(this);
+		this.handleOnClickLike = this.handleOnClickLike.bind(this);
+		this.handleOnClickDislike = this.handleOnClickDislike.bind(this);
 	}
 	
 	componentDidMount() { 
@@ -32,28 +36,38 @@ class FindProfile extends React.Component {
 			})
 	}
 
-	handleOnClick(e) {
+	handleOnClickLike(e) {
 		e.preventDefault();
-		const name = e.target.name; 
-		if(name === 'like' ) {
-			firestore.collection('users').where("uid", "===", auth.currentUser.uid)
-				.update({"liked": this.state.profiles[0].uid});
-		} 
-		this.state.profiles.shift();
+		if(this.state.count < this.state.profiles.length) {
+			firestore.collection('users').doc(auth.currentUser.uid)
+				.update({"liked": this.state.profiles[this.state.count].uid});
+			console.log("FIRST PERSON ", this.state.profiles[this.state.count])
+			this.setState(prevState => ({count: prevState.count + 1}))
+			console.log("Checkpoint 2");
+		}
 	}
+
+	handleOnClickDislike(e) {
+		if(this.state.count < this.state.profiles.length) {
+			this.setState(prevState => ({count: prevState.count + 1}));
+			console.log("Checkpoint 3");
+		}
+	}
+	
 
 	render() {
 		return (
 			<div className="FindProfile">
 				<NavigationBar/> 
 				<div class="profile-card">
-					<TinderCard user={this.state.profiles[0]}/> 
+					{/* <p> {this.state.profiles[0].username} </p> */}
+					<TinderCard user={this.state.count < this.state.profiles.length ? this.state.profiles[this.state.count] : filler}/> 
 				</div>
 				<div style={{display: 'flex', justifyContent: 'center'}}>
-					<button class="dislike-button" name="dislike" onClick={this.handleOnClick}>
+					<button class="dislike-button" name="dislike" onClick={this.handleOnClickLike}>
 						<img src={process.env.PUBLIC_URL + '/tinder-dislike.jpg'} style={{width: '50px'}}/> 
 					</button>
-					<button class="like-button" name="like" onClick={this.handleOnClick}>
+					<button class="like-button" name="like" onClick={this.handleOnClickDislike}>
 						<img src={process.env.PUBLIC_URL + '/tinder-like.jpg'} style={{width: '50px'}}/> 
 					</button>
 				</div>
