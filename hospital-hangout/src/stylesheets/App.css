@@ -95,6 +95,7 @@
   position: absolute;
   width: 85%;
   background-color: #282c34;
+  height: 100%; 
 }
 .sidebar {
   height: 100%; /* Full-height: remove this if you want "auto" height */
