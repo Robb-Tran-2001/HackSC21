@@ -20,7 +20,6 @@ const SignIn = withRouter(({history}) => (
                     if(newPerson) {
                         firestore.collection('users').doc(result.user.uid).set({
                             info: '',
-                            liked: [],
                             uid: result.user.uid,
                             username: result.user.displayName,
                             photoURL: result.user.photoURL

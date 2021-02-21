@@ -18,6 +18,20 @@ class LoginComponent extends React.Component {
 		}; 
 	}
 
+	handleUsernameChange = event => {
+		this.setState({username: event.target.value}); 
+	}
+
+	handlePasswordChange = event => {
+		this.setState({password: event.target.value}); 
+	}
+
+	handleSubmit = event => {
+		event.preventDefault(); 
+		console.log("username: " + this.state.username + "; password: " + this.state.password); 
+		//make request to endpoint to login 
+	}
+
 	render() {
 		const passwordStyle = {
 			marginTop: '20px'
