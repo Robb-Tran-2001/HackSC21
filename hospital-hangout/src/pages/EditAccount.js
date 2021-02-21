@@ -20,12 +20,20 @@ class EditAccount extends React.Component {
 	}
 
 	handleDescription = (e) => {
+<<<<<<< Updated upstream
 		this.setState({description: e.target.value}); 
+=======
+		this.setState({description: e.target.value});
+>>>>>>> Stashed changes
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault(); 
+<<<<<<< Updated upstream
 		firestore.collection('users').where("uid", "===", auth.currentUser.uid).update({"info": this.state.description});
+=======
+		firestore.collection('users').doc(auth.currentUser.uid).update({info: this.state.description});
+>>>>>>> Stashed changes
 	}
 
 	render() {

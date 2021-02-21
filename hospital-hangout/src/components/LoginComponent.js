@@ -40,7 +40,13 @@ class LoginComponent extends React.Component {
 		return (
 			<div>
 				<img class="logo" src={process.env.PUBLIC_URL + '/logo.png'}/> 
+<<<<<<< Updated upstream
 				<SignIn/>
+=======
+				<p class="motto">More Than Just a Hangout</p>
+				<SignIn/> 
+					
+>>>>>>> Stashed changes
 			</div>
 		); 
 	}
