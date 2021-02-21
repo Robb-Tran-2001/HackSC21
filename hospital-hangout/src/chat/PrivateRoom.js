@@ -129,9 +129,10 @@ class PrivateChatRoom extends React.Component {
 function ChatMessage(props) {
     const {text, uid, photoURL} = props.message;
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+    const imageExists = ((photoURL !== undefined) && (photoURL.length > 0)); 
     return (
         <div className={`message ${messageClass}`}>
-            <img src={photoURL} />
+            {imageExists ? <img src={photoURL} /> : <img src="/generic-avatar.png"/>}
             <p> {text} </p>
         </div>
     )

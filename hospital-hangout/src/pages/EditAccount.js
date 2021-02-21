@@ -12,8 +12,6 @@ class EditAccount extends React.Component {
 	constructor(props) {
 		super(props);  
 		this.state = {
-			username: '', 
-			password: '', 
 			description: ''
 		}
 	}
@@ -21,19 +19,13 @@ class EditAccount extends React.Component {
 		document.body.style.backgroundImage = "url('/find-profile-background.jpg')";
 	}
 
-	handleUsername = (e) => {
-		
-	}
-
 	handleDescription = (e) => {
-		
+		this.setState({description: e.target.value});
 	}
 
-	handleSubmit = () => {
-		console.log("username: " + this.state.username); 
-		console.log("password: " + this.state.password); 
-		// firestore.collection('users').where("uid", "===", auth.currentUser.uid).update({"username": this.state.username});
-		// firestore.collection('users').where("uid", "===", auth.currentUser.uid).update({"info": this.state.description});
+	handleSubmit = (e) => {
+		e.preventDefault(); 
+		firestore.collection('users').doc(auth.currentUser.uid).update({info: this.state.description});
 	}
 
 	render() {
@@ -43,8 +35,7 @@ class EditAccount extends React.Component {
 				<div class="edit-input-form">
 					<h1 style={{display: 'flex', justifyContent: 'center', paddingTop: '30px', color: '#5E60CE'}}>Edit Account</h1>
 					<form onSubmit={this.handleSubmit} style={{marginBottom: '30px'}}>
-						<input type="text" value={this.state.username} placeholder="Username" class="input-field"/>
-						<input type="text" value={this.state.description} placeholder="About Me" class="description-field" style={{marginTop: '20px'}}/> 
+						<input type="text" value={this.state.description} placeholder="About Me" class="description-field" style={{marginTop: '20px'}} onChange={this.handleDescription}/> 
 						<input type="submit" value="Submit" class="submit-edit"/> 
 					</form>
 				</div>

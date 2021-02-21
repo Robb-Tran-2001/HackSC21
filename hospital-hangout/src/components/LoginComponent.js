@@ -3,6 +3,11 @@ import '../stylesheets/LoginComponent.css';
 import CreateAccount from '../pages/CreateAccount'; 
 import { Link } from 'react-router-dom'; 
 import SignIn from './SignIn'; 
+import firebase from '../firebase'
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const firestore = firebase.firestore()
 
 class LoginComponent extends React.Component {
 	constructor(props) {
@@ -35,15 +40,9 @@ class LoginComponent extends React.Component {
 		return (
 			<div>
 				<img class="logo" src={process.env.PUBLIC_URL + '/logo.png'}/> 
-				<form onSubmit={this.handleSubmit} style={{marginBottom: '30px'}}>
-					<input type="text" value={this.state.username} placeholder="Username" class="input-field" onChange={this.handleUsernameChange}/>
-					<input type="password" value={this.state.password} placeholder="Password" class="input-field" style={passwordStyle} onChange={this.handlePasswordChange}/>
-					<div class="login-action">
-						<SignIn/> 
-						<input type="submit" value="Submit" class="submit-button"/> 
-					</div>
-				</form>
-				<Link to="/create-account" style={{display: 'flex', justifyContent: 'center'}}>Don't have an account? Sign Up</Link>
+				<p class="motto">More Than Just a Hangout</p>
+				<SignIn/> 
+					
 			</div>
 		); 
 	}

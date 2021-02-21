@@ -16,6 +16,11 @@ const NavigationBar = () => {
 					</Link>
 				</div>
 				<div style={{marginLeft: '50px'}}>
+					<Link to="/edit-account" style={{color: 'white', textDecoration: 'none', fontSize: '20px', lineHeight: '50px'}}> 
+						Edit Account
+					</Link>
+				</div>
+				<div style={{marginLeft: '50px'}}>
 					<Link to="/general-chat" style={{color: 'white', textDecoration: 'none', fontSize: '20px', lineHeight: '50px'}}> 
 						General Chat
 					</Link>

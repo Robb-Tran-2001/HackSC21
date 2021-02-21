@@ -129,6 +129,7 @@
 }
 .sent {
   flex-direction: row-reverse;
+  margin-right: 10px; 
 }
 
 .sent p {
@@ -139,6 +140,10 @@
 .received p {
   background:linear-gradient(to left, #5E60CE, #7400B8);
   color: white;
+}
+
+.received {
+  margin-left: 10px; 
 }
 
 .message img {
