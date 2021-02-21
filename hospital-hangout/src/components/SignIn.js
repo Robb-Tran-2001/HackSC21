@@ -10,9 +10,6 @@ const SignIn = withRouter(({history}) => (
     <button onClick={() => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider).then((result) => {
-            console.log("RESULT " ,result);
-            console.log("UID ", result.user.uid);
-            console.log("NAME ", result.user.displayName); 
             firestore.collection('users').get()
                 .then((users) => { 
                     let newPerson = true;
@@ -21,7 +18,7 @@ const SignIn = withRouter(({history}) => (
                     })
                     console.log("NEW?", newPerson);
                     if(newPerson) {
-                        firestore.collection('users').add({
+                        firestore.collection('users').doc(result.user.uid).set({
                             info: '',
                             liked: [],
                             uid: result.user.uid,

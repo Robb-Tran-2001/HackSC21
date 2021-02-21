@@ -3,6 +3,12 @@ import '../stylesheets/LoginComponent.css';
 import CreateAccount from '../pages/CreateAccount'; 
 import { Link } from 'react-router-dom'; 
 import SignIn from './SignIn'; 
+import addNotification from 'react-push-notification';
+import firebase from '../firebase'
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const firestore = firebase.firestore()
 
 class LoginComponent extends React.Component {
 	constructor(props) {
@@ -24,7 +30,24 @@ class LoginComponent extends React.Component {
 	handleSubmit = event => {
 		event.preventDefault(); 
 		console.log("username: " + this.state.username + "; password: " + this.state.password); 
-		//make request to endpoint to login 
+		firestore.collection('users').get()
+			.then((users) => { 
+				let newPerson = true
+				users.forEach(user => {
+					if(user.data().username === this.state.username && this.state.password !== ''
+						&& this.state.password && user.data().password === this.state.password) newPerson = false
+				})
+				if(!newPerson) console.log("E") //history.push('/find-profile'); 
+				else {
+					addNotification({
+						title: 'Wrong Credentials',
+						subtitle: 'Password or Username might be wrong',
+						message: 'Try again with a different username/password',
+						theme: 'darkblue',
+						native: true // when using native, your OS will handle theming.
+					});
+				}
+			})
 	}
 
 	render() {
